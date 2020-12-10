@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
+use App\Http\Controllers\PostsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,27 +43,5 @@ use App\Models\Post;
 
 // }
 
-
-Route::get('/', function () {
-  // $posts = Post::orderBy('id', 'desc')->where('is_published',1)->get();
-  $posts = Post::published()
-    ->orderBy('id', 'desc')
-    ->get();
-
-  // select content from posts
-  //  where is_published=1;
-  // return view('posts', [
-  //   'posts' => $posts,
-  // ]);
-  return view('posts', compact('posts'));
-});
-
-Route::get('/posts/{post}', function (Post $post) {
-  // $post = Post::findOrFail($id); // where('id', $id)->first()
-  // select * from users where email = $email;
-  // User::find('email', $email)
-  // User::where('email', $email)->first(); {} | null
-  return view('post', compact('post'));
-  // pronadjemo post sa IDem $id
-  // vratimo view single post
-})->name('posts.single');
+Route::get('/', [PostsController::class, 'index']);
+Route::get('/posts/{post}', [PostsController::class, 'show'])->name('posts.single');
