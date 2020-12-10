@@ -24,7 +24,7 @@ class PostsController extends Controller
     // return view('posts', [
     //   'posts' => $posts,
     // ]);
-    return view('posts', compact('posts'));
+    return view('posts.index', compact('posts'));
   }
 
   /**
@@ -59,7 +59,7 @@ class PostsController extends Controller
     // select * from users where email = $email;
     // User::find('email', $email)
     // User::where('email', $email)->first(); {} | null
-    return view('post', compact('post'));
+    return view('posts.show', compact('post'));
   }
 
   /**
