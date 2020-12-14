@@ -34,7 +34,7 @@ class PostsController extends Controller
    */
   public function create()
   {
-    //
+    return view('posts.create');
   }
 
   /**
@@ -45,7 +45,14 @@ class PostsController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    // $post = new Post;
+    // $post->title = $request->title;
+    // $post->content = $request->content;
+    // $post->is_published = $request->get('is_published', false);
+    // $post->save();
+    Post::create($request->only(['title', 'content', 'is_published']));
+
+    return redirect('/');
   }
 
   /**
