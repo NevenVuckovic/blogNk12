@@ -23,4 +23,7 @@ class Post extends Model
     return $this->title . ' ovo je iz metode';
   }
 
+  public function comments() {
+    return $this->hasMany(Comment::class);
+  }
 }
