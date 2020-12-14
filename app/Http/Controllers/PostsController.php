@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -40,18 +41,18 @@ class PostsController extends Controller
   /**
    * Store a newly created resource in storage.
    *
-   * @param  \Illuminate\Http\Request  $request
+   * @param  App\Http\Requests\CreatePostRequest  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(Request $request)
+  public function store(CreatePostRequest $request)
   {
     // $post = new Post;
     // $post->title = $request->title;
     // $post->content = $request->content;
     // $post->is_published = $request->get('is_published', false);
     // $post->save();
-    Post::create($request->only(['title', 'content', 'is_published']));
-
+    $data = $request->validated();
+    Post::create($data);
     return redirect('/');
   }
 
