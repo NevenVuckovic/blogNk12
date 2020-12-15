@@ -16,7 +16,8 @@ class PostsController extends Controller
   public function index()
   {
     // $posts = Post::orderBy('id', 'desc')->where('is_published',1)->get();
-    $posts = Post::published()
+    $posts = Post::with('comments')
+      ->where('is_published', 1)
       ->orderBy('id', 'desc')
       ->get();
 
@@ -62,7 +63,8 @@ class PostsController extends Controller
    * @param  \App\Models\Post  $post
    * @return \Illuminate\Http\Response
    */
-  public function show(Post $post) {
+  public function show(Post $post)
+  {
     // $post = Post::findOrFail($id); // where('id', $id)->first()
     // select * from users where email = $email;
     // User::find('email', $email)
@@ -103,4 +105,5 @@ class PostsController extends Controller
   {
     //
   }
+
 }

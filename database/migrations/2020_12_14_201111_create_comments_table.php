@@ -6,35 +6,35 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCommentsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('comments', function (Blueprint $table) {
-            $table->id();
-            $table->text('content');
+  /**
+   * Run the migrations.
+   *
+   * @return void
+   */
+  public function up()
+  {
+    Schema::create('comments', function (Blueprint $table) {
+      $table->id();
+      $table->text('content');
 
-            // post_id - unsigned big integer 
-            // constraint references id on posts
-            $table->foreignId('post_id')
-              ->constrained()
-              ->onUpdate('cascade')
-              ->onDelete('cascade');
+      // post_id - unsigned big integer 
+      // constraint references id on posts
+      $table->foreignId('post_id')
+        ->constrained()
+        ->onUpdate('cascade')
+        ->onDelete('cascade');
 
-            $table->timestamps();
-        });
-    }
+      $table->timestamps();
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('comments');
-    }
+  /**
+   * Reverse the migrations.
+   *
+   * @return void
+   */
+  public function down()
+  {
+    Schema::dropIfExists('comments');
+  }
 }

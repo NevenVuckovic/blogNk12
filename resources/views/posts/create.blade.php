@@ -12,7 +12,7 @@
   </div>
   <div class="mb-3">
     <label for="content" class="form-label">Write here:</label>
-    <textarea class="form-control @error('title') is-invalid @enderror" id="content" name="content"></textarea>
+    <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content"></textarea>
     @include('partials.error-message', ['field' => 'content'])
   </div>
   <div class="mb-3 form-check">
