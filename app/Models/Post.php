@@ -11,6 +11,8 @@ class Post extends Model
 
   protected $fillable = [ 'title', 'content', 'is_published' ];
 
+  protected $casts = [ 'is_published' => 'boolean' ];
+
   public static function published() {
     return self::where('is_published', true);
   }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CommentsController;
 
@@ -47,6 +48,7 @@ Route::get('/', [PostsController::class, 'index']);
 Route::get('/posts/create', [PostsController::class, 'create']);
 Route::get('/posts/{post}', [PostsController::class, 'show'])->name('posts.show');
 Route::post('/posts', [PostsController::class, 'store']);
-
-
 Route::post('/posts/{post}/comments', [CommentsController::class, 'store'])->name('comments.store');
+
+Route::get('/register', [AuthController::class, 'getRegistrationForm']);
+Route::post('/register', [AuthController::class, 'register']);
