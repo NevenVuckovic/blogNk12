@@ -45,17 +45,16 @@ use App\Http\Controllers\CommentsController;
 // }
 
 Route::get('/', [PostsController::class, 'index']);
-Route::get('/posts/create', [PostsController::class, 'create']);
+Route::get('/posts/create', [PostsController::class, 'create'])->middleware('auth');
+Route::post('/posts', [PostsController::class, 'store'])->middleware('auth');
 Route::get('/posts/{post}', [PostsController::class, 'show'])->name('posts.show');
-Route::post('/posts', [PostsController::class, 'store']);
-Route::post('/posts/{post}/comments', [CommentsController::class, 'store'])->name('comments.store');
+Route::post('/posts/{post}/comments', [CommentsController::class, 'store'])->name('comments.store')->middleware('auth');
 
-Route::get('/register', [AuthController::class, 'getRegistrationForm']);
-Route::post('/register', [AuthController::class, 'register']);
-Route::get('/login', [AuthController::class, 'getLoginForm']);
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
 
-Route::get('/profile', function () {
-  return auth()->user();
+Route::middleware(['guest'])->group(function() {
+  Route::get('/register', [AuthController::class, 'getRegistrationForm']);
+  Route::post('/register', [AuthController::class, 'register']);
+  Route::get('/login', [AuthController::class, 'getLoginForm'])->name('login');
+  Route::post('/login', [AuthController::class, 'login']);
 });
