@@ -53,7 +53,7 @@ class PostsController extends Controller
     // $post->is_published = $request->get('is_published', false);
     // $post->save();
     $data = $request->validated();
-    Post::create($data);
+    auth()->user()->posts()->create($data);
     return redirect('/');
   }
 

@@ -34,4 +34,8 @@ class Post extends Model
       'content' => $content
     ]);
   }
+
+  public function author() {
+    return $this->belongsTo(User::class, 'user_id');
+  }
 }
