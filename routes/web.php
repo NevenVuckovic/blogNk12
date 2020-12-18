@@ -48,7 +48,7 @@ Route::get('/', [PostsController::class, 'index']);
 Route::get('/posts/create', [PostsController::class, 'create'])->middleware('auth');
 Route::post('/posts', [PostsController::class, 'store'])->middleware('auth');
 Route::get('/posts/{post}', [PostsController::class, 'show'])->name('posts.show');
-Route::post('/posts/{post}/comments', [CommentsController::class, 'store'])->name('comments.store')->middleware('auth');
+Route::post('/posts/{post}/comments', [CommentsController::class, 'store'])->name('comments.store')->middleware('auth', 'noBadWords');
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
 
@@ -58,3 +58,4 @@ Route::middleware(['guest'])->group(function() {
   Route::get('/login', [AuthController::class, 'getLoginForm'])->name('login');
   Route::post('/login', [AuthController::class, 'login']);
 });
+Route::get('/profile', function() {return auth()->user();});
