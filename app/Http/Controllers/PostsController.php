@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePostRequest;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -16,10 +17,12 @@ class PostsController extends Controller
   public function index()
   {
     // $posts = Post::orderBy('id', 'desc')->where('is_published',1)->get();
-    $posts = Post::with('comments')
+    $posts = Post::with('comments', 'tags')
       ->where('is_published', 1)
       ->orderBy('id', 'desc')
-      ->get();
+      ->paginate(2);
+
+      info($posts);
 
     // select content from posts
     //  where is_published=1;
@@ -36,7 +39,8 @@ class PostsController extends Controller
    */
   public function create()
   {
-    return view('posts.create');
+      $tags = Tag::all();
+    return view('posts.create', compact('tags'));
   }
 
   /**
@@ -52,8 +56,16 @@ class PostsController extends Controller
     // $post->content = $request->content;
     // $post->is_published = $request->get('is_published', false);
     // $post->save();
+    info($request);
     $data = $request->validated();
+
+    info($data);
     auth()->user()->posts()->create($data);
+    return redirect('/');
+
+    info($post);
+    $post->tags()->attach($request->tag_id);
+
     return redirect('/');
   }
 

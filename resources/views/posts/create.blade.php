@@ -15,6 +15,13 @@
     <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content"></textarea>
     @include('partials.error-message', ['field' => 'content'])
   </div>
+  @if($tags)
+  <select name="tag_id" id="tag_id">
+  @foreach ($tags as $tag)
+  <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+  @endforeach
+    </select>
+    @endif
   <div class="mb-3 form-check">
     <input type="checkbox" class="form-check-input" id="is_published" name="is_published" value="1">
     <label class="form-check-label" for="is_published">Publish immediately</label>

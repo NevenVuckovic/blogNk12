@@ -12,5 +12,7 @@
       </a>
     </li>
   @endforeach
+
+  {{$posts->links()}}
 </ul>
 @endsection

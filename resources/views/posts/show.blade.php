@@ -13,9 +13,19 @@
   <p>{{$comment->content}}</p>
 @endforeach
 <hr/>
+
+
+
+    @if(Session::has('message'))
+<div>
+    {{session('message')}}
+</div>
+    @endif
+
 <form method="POST" action="{{route('comments.store', ['post' => $post])}}">
   @csrf
   <div class="mb-3">
+    <input type="text" id="AgeRestriction" name="AgeRestriction"/>
     <label for="content" class="form-label">Write here:</label>
     <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content"></textarea>
     @include('partials.error-message', ['field' => 'content'])

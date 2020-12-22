@@ -19,7 +19,10 @@ class CommentsController extends Controller
   {
     $data = $request->validated();
     $post->createComment($data['content']);
-    return redirect(route('posts.show', ['post'=>$post]));
+
+    session(['message' => 'uspesno kreirana sesija']);
+    info(session('message'));
+    return redirect(route('posts.show', ['post'=>$post]))->with('message', 'uspesno komentarisano');
   }
 
   /**
